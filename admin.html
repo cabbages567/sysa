@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿管理后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft Yahei", sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 26px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 12px;
+        }
+        .submission-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+        }
+        .submission-item h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .submission-info {
+            color: #34495e;
+            line-height: 1.8;
+            font-size: 14px;
+        }
+        .submission-info strong {
+            color: #2c3e50;
+            min-width: 80px;
+            display: inline-block;
+        }
+        .empty-tip {
+            text-align: center;
+            color: #7f8c8d;
+            padding: 60px 0;
+            font-size: 16px;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .back-link a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 15px;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 投稿管理后台</h1>
+
+        {% if submissions %}
+            {% for sub in submissions %}
+            <div class="submission-item">
+                <div class="submission-info">
+                    {% set lines = sub.split('\n') %}
+                    {% for line in lines %}
+                        {% if line %}
+                            <p>{{ line | safe }}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-tip">暂无投稿记录</div>
+        {% endif %}
+
+        <div class="back-link">
+            <a href="/">返回投稿页面</a>
+        </div>
+    </div>
+</body>
+</html>
